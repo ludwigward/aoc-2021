@@ -33,7 +33,7 @@ func main() {
 	}
 
 	partA(values, directions)
-	partB()
+	partB(values, directions)
 }
 
 func partA(values []int, directions []string) {
@@ -51,9 +51,24 @@ func partA(values []int, directions []string) {
 		row++
 	}
 
-	fmt.Println(depth, position, depth*position)
+	fmt.Println("Part 1: ", depth, position, depth*position)
 }
 
-func partB() {
+func partB(values []int, directions []string) {
+	var depth, position, aim, row int
 
+	for row < len(values) {
+		if directions[row] == "forward" {
+			position += values[row]
+			depth -= values[row] * aim
+		} else if directions[row] == "up" {
+			aim += values[row]
+		} else if directions[row] == "down" {
+			aim -= values[row]
+		}
+
+		row++
+	}
+
+	fmt.Println("Part 2: ", depth, position, depth*position)
 }
